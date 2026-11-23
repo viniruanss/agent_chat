@@ -3,6 +3,7 @@ import {
   Catch,
   ExceptionFilter,
   HttpException,
+  HttpStatus,
   Logger,
 } from '@nestjs/common';
 import { STATUS_CODES } from 'node:http';
@@ -23,23 +24,35 @@ const DEFAULT_DETAIL: Record<ErrorCode, string> = {
 
 type Problem = { status: number; code: ErrorCode; detail: string };
 
-/** Erro do leitor do corpo do Express (body-parser), que traz o status no próprio erro. */
-type BodyParserError = Error & { status: number; type: string };
-
-function isBodyParserError(exception: unknown): exception is BodyParserError {
-  return (
-    exception instanceof Error &&
-    typeof (exception as Partial<BodyParserError>).status === 'number' &&
-    typeof (exception as Partial<BodyParserError>).type === 'string'
-  );
+/**
+ * Status aceito de um erro que não é de domínio: o da `HttpException` e o do erro do leitor do
+ * corpo do Express (body-parser), que traz `status` e `type`. Qualquer outro é inesperado.
+ */
+function statusOf(exception: unknown): number | undefined {
+  if (exception instanceof HttpException) return exception.getStatus();
+  if (!(exception instanceof Error)) return undefined;
+  const { status, type } = exception as Error & {
+    status?: unknown;
+    type?: unknown;
+  };
+  return typeof status === 'number' && typeof type === 'string'
+    ? status
+    : undefined;
 }
 
-function codeForStatus(status: number): ErrorCode | null {
-  if (status === 400) return 'validation_failed';
-  if (status === 404) return 'not_found';
-  if (status === 413) return 'payload_too_large';
-  if (status >= 400 && status < 500) return 'request_rejected';
-  return null;
+/** O 400 do `ValidationPipe` e o do JSON malformado são, para o cliente, entrada inválida. */
+const CODE_BY_STATUS: Partial<Record<number, ErrorCode>> = {
+  [HttpStatus.BAD_REQUEST]: 'validation_failed',
+  [HttpStatus.NOT_FOUND]: 'not_found',
+  [HttpStatus.PAYLOAD_TOO_LARGE]: 'payload_too_large',
+};
+
+/** Outro 4xx vira `request_rejected`, mantendo o status; um 5xx é tratado como inesperado. */
+function codeForStatus(status: number): ErrorCode | undefined {
+  return (
+    CODE_BY_STATUS[status] ??
+    (status >= 400 && status < 500 ? 'request_rejected' : undefined)
+  );
 }
 
 /**
@@ -52,20 +65,19 @@ export class ProblemDetailsFilter implements ExceptionFilter {
 
   catch(exception: unknown, host: ArgumentsHost): void {
     const problem = this.toProblem(exception);
-    const response = host.switchToHttp().getResponse<Response>();
 
-    response
+    host
+      .switchToHttp()
+      .getResponse<Response>()
       .status(problem.status)
       .type(PROBLEM_CONTENT_TYPE)
-      .send(
-        JSON.stringify({
-          type: 'about:blank',
-          title: STATUS_CODES[problem.status],
-          status: problem.status,
-          detail: problem.detail,
-          code: problem.code,
-        }),
-      );
+      .json({
+        type: 'about:blank',
+        title: STATUS_CODES[problem.status],
+        status: problem.status,
+        detail: problem.detail,
+        code: problem.code,
+      });
   }
 
   private toProblem(exception: unknown): Problem {
@@ -77,14 +89,9 @@ export class ProblemDetailsFilter implements ExceptionFilter {
       };
     }
 
-    const status =
-      exception instanceof HttpException
-        ? exception.getStatus()
-        : isBodyParserError(exception)
-          ? exception.status
-          : null;
-    const code = status === null ? null : codeForStatus(status);
-    if (status !== null && code !== null) {
+    const status = statusOf(exception);
+    const code = status === undefined ? undefined : codeForStatus(status);
+    if (status !== undefined && code !== undefined) {
       return { status, code, detail: DEFAULT_DETAIL[code] };
     }
 

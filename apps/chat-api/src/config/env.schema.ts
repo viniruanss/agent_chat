@@ -11,11 +11,8 @@ export type Env = z.infer<typeof envSchema>;
 export function parseEnv(raw: Record<string, unknown>): Env {
   const result = envSchema.safeParse(raw);
   if (!result.success) {
-    const problems = result.error.issues.map(
-      (issue) => `${issue.path.join('.')}: ${issue.message}`,
-    );
     throw new Error(
-      `Configuração inválida da API do chat:\n- ${problems.join('\n- ')}`,
+      `Configuração inválida da API do chat:\n${z.prettifyError(result.error)}`,
     );
   }
   return result.data;

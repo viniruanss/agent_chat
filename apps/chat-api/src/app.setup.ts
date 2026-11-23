@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 
-export const API_PREFIX = 'v1';
+const API_PREFIX = 'v1';
 
 /** Configuração da aplicação que vale igual no `main.ts` e no `createTestApp()`. */
 export function configureApp(app: INestApplication): void {

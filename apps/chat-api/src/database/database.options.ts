@@ -10,6 +10,5 @@ export function buildDataSourceOptions(
     url: databaseUrl,
     namingStrategy: new SnakeNamingStrategy(),
     synchronize: false,
-    migrationsTableName: 'migrations',
   };
 }
