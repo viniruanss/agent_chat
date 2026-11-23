@@ -1,6 +1,6 @@
 # 04: Pedir o Relatório de um período ao Agente
 
-**Status:** concluída
+**Status:** a fazer
 
 **O que construir:** uma Pessoa com Permissão de dados menciona o Agente e pede um Relatório em PDF
 de um período ("@assistente me manda um relatório de março de 2026 em PDF"), vê o Aviso de início
@@ -19,19 +19,19 @@ continua respondida em texto. Referências:
 
 **Bloqueada por:** 01, 02, 03
 
-- [x] **CA1** · O período anterior é uma função pura (mês, trimestre e ano inteiros contra os
+- [ ] **CA1** · O período anterior é uma função pura (mês, trimestre e ano inteiros contra os
   anteriores inteiros; intervalo contra os mesmos dias antes; período em andamento contra o mesmo
   trecho), no fuso da empresa, com testes de unidade para virada de ano, mês mais curto e bissexto.
-- [x] **CA2** · A ferramenta `gerar_relatorio` segue a ordem da spec: permissão (recusa e
+- [ ] **CA2** · A ferramenta `gerar_relatorio` segue a ordem da spec: permissão (recusa e
   `no_permission`, sem trava), parâmetros, trava com `SET NX` (recusa de Relatório em andamento),
   período anterior, Aviso de início pela ação `report_started` com a marca e só depois o job na
   fila; e encerra a vez do modelo.
-- [x] **CA3** · Sem período, o Agente chama `perguntar_periodo`, e a continuação gera o Relatório.
-- [x] **CA4** · As instruções dizem que só pedido explícito de relatório ou PDF vira Relatório, que
+- [ ] **CA3** · Sem período, o Agente chama `perguntar_periodo`, e a continuação gera o Relatório.
+- [ ] **CA4** · As instruções dizem que só pedido explícito de relatório ou PDF vira Relatório, que
   pergunta de número vai para `consultar_dados`, o que o Relatório traz e a recusa curta atualizada.
-- [x] **CA5** · Testes de integração cobrem a ferramenta (sem permissão, trava presa, a ordem aviso
+- [ ] **CA5** · Testes de integração cobrem a ferramenta (sem permissão, trava presa, a ordem aviso
   e fila) e um Pedido com o modelo real que grava o aviso e, com o Worker, entrega o PDF.
-- [x] **CA6** · Um teste Playwright com o modelo real e o Worker rodando: a Pessoa com permissão
+- [ ] **CA6** · Um teste Playwright com o modelo real e o Worker rodando: a Pessoa com permissão
   pede o Relatório, vê o aviso, envia outra Mensagem, vê a entrega, baixa e confere que é um PDF; a
   outra Pessoa vê o aviso e a entrega bloqueados, sem recarregar.
-- [x] **CA7** · O LLD é atualizado pela skill `lld` nas seções que esta tarefa toca.
+- [ ] **CA7** · O LLD é atualizado pela skill `lld` nas seções que esta tarefa toca.

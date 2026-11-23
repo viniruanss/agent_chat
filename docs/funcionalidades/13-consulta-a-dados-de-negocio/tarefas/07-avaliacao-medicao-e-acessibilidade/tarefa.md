@@ -1,6 +1,6 @@
 # 07: Avaliação, medição e acessibilidade da consulta
 
-**Status:** concluída
+**Status:** a fazer
 
 **O que construir:** quem mantém o Agente consegue trocar instruções ou modelo sabendo que a
 consulta continua certa: a avaliação completa cobre a consulta, com o número conferido contra o
@@ -17,20 +17,20 @@ acessibilidade. Referências:
 
 **Bloqueada por:** 05, 06
 
-- [x] **CA1** · A forma de rodar `consultar_dados` contra o Banco de negócio real no `adk eval`, com
+- [ ] **CA1** · A forma de rodar `consultar_dados` contra o Banco de negócio real no `adk eval`, com
   o `eval_fixtures.py` deixando a ferramenta passar e o "hoje" em 15/10/2026, é decidida consultando
   o MCP `adk-docs` e registrada no plano.
-- [x] **CA2** · O evalset `dados` tem 30 casos com configuração própria, cobrindo as categorias da
+- [ ] **CA2** · O evalset `dados` tem 30 casos com configuração própria, cobrindo as categorias da
   spec, e o caso `fora_dados` da F11 passa a ser uma consulta.
-- [x] **CA3** · A avaliação completa, com os 73 casos de resumo, delegação e consulta, atinge ≥ 98%
+- [ ] **CA3** · A avaliação completa, com os 73 casos de resumo, delegação e consulta, atinge ≥ 98%
   de aprovação, com o custo por caso informado.
-- [x] **CA4** · O p95 da consulta completa, da Mensagem enviada até a resposta aparecer, fica ≤ 5 s
+- [ ] **CA4** · O p95 da consulta completa, da Mensagem enviada até a resposta aparecer, fica ≤ 5 s
   com o modelo padrão, registrado na pasta desta tarefa.
-- [x] **CA5** · A checagem com `@axe-core/playwright` na Conversa com uma resposta completa e uma
+- [ ] **CA5** · A checagem com `@axe-core/playwright` na Conversa com uma resposta completa e uma
   bloqueada, nos dois temas, não tem violações.
-- [x] **CA6** · O roteiro manual da nota 100 de Acessibilidade do Lighthouse nos dois temas fica na
+- [ ] **CA6** · O roteiro manual da nota 100 de Acessibilidade do Lighthouse nos dois temas fica na
   pasta desta tarefa.
-- [x] **CA7** · O LLD é atualizado pela skill `lld` nas seções que esta tarefa toca.
+- [ ] **CA7** · O LLD é atualizado pela skill `lld` nas seções que esta tarefa toca.
 
 **Resultados:** a avaliação completa aprovou 72 de 73 casos (98,6%), com os 30 da consulta
 aprovados, e a consulta custa cerca de US$ 0,0035 por caso (`avaliacao.md`); o p95 da consulta é de

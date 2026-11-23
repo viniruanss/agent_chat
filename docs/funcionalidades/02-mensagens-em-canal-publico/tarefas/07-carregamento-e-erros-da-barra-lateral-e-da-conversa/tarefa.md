@@ -1,6 +1,6 @@
 # 07: Carregamento e erros da barra lateral e da Conversa
 
-**Status:** concluída
+**Status:** a fazer
 
 **O que construir:** a Pessoa sempre sabe o que está acontecendo:
 - a barra lateral mostra o esqueleto enquanto carrega e um erro com "Tentar de novo" quando falha;
@@ -16,18 +16,18 @@ Referências:
 
 **Bloqueada por:** 02 (Abrir um Canal criado por comando e enviar uma Mensagem)
 
-- [x] **CA1** · A barra lateral carrega num `Suspense` próprio, com o esqueleto (25:19071). Se a
+- [ ] **CA1** · A barra lateral carrega num `Suspense` próprio, com o esqueleto (25:19071). Se a
   lista falha, ela mostra "Não foi possível carregar suas conversas." com "Tentar de novo"
   (25:19177), que refaz a renderização, sem derrubar o resto do shell.
-- [x] **CA2** · A seção "Canais" recolhe e expande pelo clique e pelo teclado (25:20813), com o
+- [ ] **CA2** · A seção "Canais" recolhe e expande pelo clique e pelo teclado (25:20813), com o
   estado exposto a leitores de tela.
-- [x] **CA3** · A linha da Conversa aberta fica ativa, num componente cliente pequeno que lê o
+- [ ] **CA3** · A linha da Conversa aberta fica ativa, num componente cliente pequeno que lê o
   segmento da rota, e muda ao trocar de Canal e ao voltar e avançar no navegador.
-- [x] **CA4** · A Conversa mostra "Histórico carregando" (21:1869) enquanto carrega. Se a Conversa
+- [ ] **CA4** · A Conversa mostra "Histórico carregando" (21:1869) enquanto carrega. Se a Conversa
   ou a primeira página falham, ela mostra "Não foi possível carregar as mensagens desta conversa."
   com "Tentar de novo" (21:4642), e o cabeçalho mostra o nome quando a Conversa carregou.
-- [x] **CA5** · O Playwright prova a seção recolhida e expandida e a linha ativa.
-- [x] **CA6** · A verificação do agente com o `playwright-cli`, com a falha provocada só nas rotas
+- [ ] **CA5** · O Playwright prova a seção recolhida e expandida e a linha ativa.
+- [ ] **CA6** · A verificação do agente com o `playwright-cli`, com a falha provocada só nas rotas
   de Conversas e de Mensagens e a verificação da Sessão funcionando, como a spec descreve
   ("Verificações do agente"), confere os erros da barra lateral e da Conversa e o "Tentar de novo"
   depois de desfazer a falha. Ela fica

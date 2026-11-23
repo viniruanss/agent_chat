@@ -1,6 +1,6 @@
 # 06: Pergunta pendente de período
 
-**Status:** concluída
+**Status:** a fazer
 
 **O que construir:** a Pessoa com Permissão de dados pergunta sem período ("quanto faturamos?"), e o
 Agente pergunta "De que período?" com as Respostas prontas "Este mês", "Mês passado" e "Este ano".
@@ -15,17 +15,17 @@ março, não reaproveita a pergunta anterior. Referências:
 
 **Bloqueada por:** 04
 
-- [x] **CA1** · A ferramenta `perguntar_periodo()` grava a Pergunta pendente "De que período?" com
+- [ ] **CA1** · A ferramenta `perguntar_periodo()` grava a Pergunta pendente "De que período?" com
   as três Respostas prontas, sem a marca, e recusa rodar numa continuação.
-- [x] **CA2** · As instruções mandam chamar `perguntar_periodo` quando falta o período, e, numa
+- [ ] **CA2** · As instruções mandam chamar `perguntar_periodo` quando falta o período, e, numa
   continuação que não completa a consulta, dizer que não entendeu o que consultar, sem perguntar de
   novo.
-- [x] **CA3** · As instruções tratam cada Pedido como completo: "e em abril?" sem o resto é pergunta
+- [ ] **CA3** · As instruções tratam cada Pedido como completo: "e em abril?" sem o resto é pergunta
   sem o que consultar.
-- [x] **CA4** · Testes de integração com o modelo real cobrem a pergunta, a continuação "mês
+- [ ] **CA4** · Testes de integração com o modelo real cobrem a pergunta, a continuação "mês
   passado" que responde e a que não completa; um teste Playwright, com o bot agindo pela rota,
   mostra os botões desativados para o outro Membro.
-- [x] **CA5** · O LLD é atualizado pela skill `lld` nas seções que esta tarefa toca.
+- [ ] **CA5** · O LLD é atualizado pela skill `lld` nas seções que esta tarefa toca.
 
 **Modelo real:** os testes de integração da continuação "Mês passado" e da que não completa
 (`tests/integration/test_request_business.py`) passaram depois que a chave do Gemini voltou a ter

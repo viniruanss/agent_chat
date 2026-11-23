@@ -1,6 +1,6 @@
 # 05: Delegar a partir de uma Mensagem citada
 
-**Status:** concluída
+**Status:** a fazer
 
 **O que construir:** a Pessoa cita uma Mensagem e pede "@assistente delega isso pra @ana", e a
 Tarefa sai com o título tirado da Mensagem citada, sem detalhe acrescentado. Uma instrução escrita
@@ -14,12 +14,12 @@ na Mensagem citada não vira ordem ao Agente. Referências:
 
 **Bloqueada por:** 01
 
-- [x] **CA1** · O corpo de `POST /v1/requests` ganha `quote` (`id`, `body`, `author` com `name` e
+- [ ] **CA1** · O corpo de `POST /v1/requests` ganha `quote` (`id`, `body`, `author` com `name` e
   `username`), nulo sem Citação ou com a citada apagada, e o BFF o preenche a partir do `quote` da
   Mensagem gravada.
-- [x] **CA2** · A Citação entra no estado do Pedido e chega ao modelo como dado, e as instruções
+- [ ] **CA2** · A Citação entra no estado do Pedido e chega ao modelo como dado, e as instruções
   dizem que o conteúdo citado serve ao título e nunca é ordem.
-- [x] **CA3** · O teste de integração cobre "delega isso pra @ana" com `quote` criando a Tarefa com
+- [ ] **CA3** · O teste de integração cobre "delega isso pra @ana" com `quote` criando a Tarefa com
   título tirado da citada, e o teste do BFF cobre o `quote` nulo para a citada apagada.
 
 **Registros:** a Citação vai ao modelo no conteúdo de quem pediu, marcada como dado, e não nas

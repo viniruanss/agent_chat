@@ -1,6 +1,6 @@
 # 09: Comando de canais completo e conta nova nos Canais
 
-**Status:** concluída
+**Status:** a fazer
 
 **O que construir:** quem opera a instalação troca o Tópico de um Canal e lista os Canais que
 existem. A conta que cria pelo comando de contas já entra em todos os Canais públicos, sem outro
@@ -17,12 +17,12 @@ passo, mesmo se um Canal for criado ao mesmo tempo. Referências:
 **Bloqueada por:** 01 (Bases de transação e de testes de unidade), 02 (Abrir um Canal criado por
 comando e enviar uma Mensagem)
 
-- [x] **CA1** · O comando de canais tem `set-topic`, que troca o Tópico pela regra da spec e o
+- [ ] **CA1** · O comando de canais tem `set-topic`, que troca o Tópico pela regra da spec e o
   apaga quando o Tópico é vazio, e `list`, que lista os Canais com nome, Tópico e número de
   Membros. Um nome que não existe é recusado, com mensagem.
-- [x] **CA2** · O `create` do comando de contas grava a Pessoa e a participação dela em todos os
+- [ ] **CA2** · O `create` do comando de contas grava a Pessoa e a participação dela em todos os
   Canais públicos numa transação só, que começa tomando a mesma trava de participação do `create`
   de canais.
-- [x] **CA3** · Os testes de integração provam CA1 e CA2: a conta nova é Membro de todos os Canais
+- [ ] **CA3** · Os testes de integração provam CA1 e CA2: a conta nova é Membro de todos os Canais
   públicos, e uma falha ao gravar a participação desfaz a criação da Pessoa.
-- [x] **CA4** · O `AGENTS.md` da API lista as operações novas do comando de canais.
+- [ ] **CA4** · O `AGENTS.md` da API lista as operações novas do comando de canais.

@@ -1,6 +1,6 @@
 # 06: Avaliação, medição e acessibilidade da delegação
 
-**Status:** concluída
+**Status:** a fazer
 
 **O que construir:** quem mantém o Agente consegue trocar instruções ou modelo sabendo que a
 delegação continua certa: a avaliação completa cobre a delegação e reprova Responsável errado e
@@ -15,15 +15,15 @@ novas passam na acessibilidade. Referências:
 
 **Bloqueada por:** 03, 04, 05
 
-- [x] **CA1** · A forma de checar o `responsavel` exatamente e o `titulo` pelo juiz no `adk eval`
+- [ ] **CA1** · A forma de checar o `responsavel` exatamente e o `titulo` pelo juiz no `adk eval`
   é decidida consultando o MCP `adk-docs` e registrada no plano.
-- [x] **CA2** · O evalset do `assistente` ganha cerca de 18 casos de delegação, cobrindo as
+- [ ] **CA2** · O evalset do `assistente` ganha cerca de 18 casos de delegação, cobrindo as
   categorias da spec, e o caso `fora_tarefa` passa a ser uma delegação.
-- [x] **CA3** · A avaliação completa, com os casos de resumo e de delegação, atinge ≥ 98% de
+- [ ] **CA3** · A avaliação completa, com os casos de resumo e de delegação, atinge ≥ 98% de
   aprovação, com o custo por caso informado pelo `token_usage_v1`.
-- [x] **CA4** · O p95 do Pedido de delegação completo, da Mensagem enviada até a confirmação, fica ≤
+- [ ] **CA4** · O p95 do Pedido de delegação completo, da Mensagem enviada até a confirmação, fica ≤
   5 s com o modelo padrão, registrado na pasta desta tarefa.
-- [x] **CA5** · A checagem com `@axe-core/playwright` na aba Tarefas e na aba Todas com Notificações
+- [ ] **CA5** · A checagem com `@axe-core/playwright` na aba Tarefas e na aba Todas com Notificações
   de Tarefa passa nos dois temas, e a validação visual com o `playwright-cli` em 1440 × 900 é
   registrada aqui.
 - [ ] **CA6** · O roteiro manual registra a nota 100 de Acessibilidade do Lighthouse nos dois temas

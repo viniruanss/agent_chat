@@ -1,6 +1,6 @@
 # 03: Status
 
-**Status:** concluída
+**Status:** a fazer
 
 **O que construir:** no diálogo "Editar perfil", a Pessoa escolhe um dos sete emojis e escreve a
 mensagem de Status, ou limpa os dois. Para os outros, o emoji aparece ao lado do nome dela em
@@ -20,25 +20,25 @@ Referências:
 
 **Bloqueada por:** 02 (Perfil em tempo real)
 
-- [x] **CA1** · Antes do código, o Figma ganha o emoji de Status no autor da Mensagem, em
+- [ ] **CA1** · Antes do código, o Figma ganha o emoji de Status no autor da Mensagem, em
   "Membros de #nome", nos resultados de "Nova conversa" e no cabeçalho da Conversa direta, o
   painel de perfil com o texto do Status e o diálogo com o Status limpo, nos dois temas; o
   sétimo emoji do diálogo é conferido no frame e registrado no LLD.
-- [x] **CA2** · A migração acrescenta o emoji e o texto do Status com os CHECKs; o
+- [ ] **CA2** · A migração acrescenta o emoji e o texto do Status com os CHECKs; o
   `PATCH /v1/people/me` aceita os dois, grava `speech` no texto sem emoji, limpa o Status com os
   dois nulos e recusa texto acima de 100, com quebra de linha ou chave fora das sete.
-- [x] **CA3** · O Status vai no `person.updated`, em `GET /v1/sessions/current`, no Perfil, na
+- [ ] **CA3** · O Status vai no `person.updated`, em `GET /v1/sessions/current`, no Perfil, na
   busca e nos Membros; `GET /v1/people/presence` devolve só quem tem Status, e o BFF o expõe em
   `GET /api/people/presence`.
-- [x] **CA4** · A camada de Pessoas lê o retrato na conexão e a cada `sync`, e quem não está nele
+- [ ] **CA4** · A camada de Pessoas lê o retrato na conexão e a cada `sync`, e quem não está nele
   fica sem Status.
-- [x] **CA5** · O diálogo ganha o grupo de rádio dos sete emojis, pelas setas, com Enter ou
+- [ ] **CA5** · O diálogo ganha o grupo de rádio dos sete emojis, pelas setas, com Enter ou
   espaço no marcado desmarcando, e a "Mensagem de status"; as regras novas entram no módulo
   compartilhado e no "Erro de campo".
-- [x] **CA6** · O UserStatus aparece em todos os lugares da spec, e não no Alerta nem na
+- [ ] **CA6** · O UserStatus aparece em todos os lugares da spec, e não no Alerta nem na
   Atividade; o painel de perfil mostra o emoji e a mensagem por inteiro.
-- [x] **CA7** · O Playwright prova o Status definido por uma Pessoa visto pela outra sem
+- [ ] **CA7** · O Playwright prova o Status definido por uma Pessoa visto pela outra sem
   recarregar, com a mensagem no Tooltip, e o Status limpo sumindo; tudo pelo teclado; e o axe no
   diálogo e no painel, sem violações.
-- [x] **CA8** · A validação visual do diálogo com Status e dos frames novos, nos dois temas, fica
+- [ ] **CA8** · A validação visual do diálogo com Status e dos frames novos, nos dois temas, fica
   nesta pasta.

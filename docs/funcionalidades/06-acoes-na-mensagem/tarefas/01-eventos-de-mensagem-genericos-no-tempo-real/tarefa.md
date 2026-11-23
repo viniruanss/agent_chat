@@ -1,6 +1,6 @@
 # 01: Eventos de Mensagem genéricos no tempo real
 
-**Status:** concluída
+**Status:** a fazer
 
 **O que construir:** refatoração prévia, sem mudança de comportamento. O publisher, o reenvio na
 reconexão do gateway e o provedor de tempo real da web deixam de supor que todo evento guardado de
@@ -14,11 +14,11 @@ Referências:
 
 **Bloqueada por:** Nenhuma (pode começar imediatamente)
 
-- [x] **CA1** · A emissão do publisher e o reenvio do gateway usam o nome do evento guardado, sem
+- [ ] **CA1** · A emissão do publisher e o reenvio do gateway usam o nome do evento guardado, sem
   conversão fixa para `message.created`, com tipagem que só aceita nomes do mapa de eventos
   guardados.
-- [x] **CA2** · No provedor da web, a aplicação de um evento guardado é escolhida pelo nome, de
+- [ ] **CA2** · No provedor da web, a aplicação de um evento guardado é escolhida pelo nome, de
   modo que um evento novo entre como mais um caso, com o mesmo buffer e a mesma ordem da
   sincronização.
-- [x] **CA3** · Os testes atuais de tempo real da API (mensagens, recuperação, Membros) e da web
+- [ ] **CA3** · Os testes atuais de tempo real da API (mensagens, recuperação, Membros) e da web
   continuam passando sem mudança de expectativa, e a verificação completa dos dois projetos passa.

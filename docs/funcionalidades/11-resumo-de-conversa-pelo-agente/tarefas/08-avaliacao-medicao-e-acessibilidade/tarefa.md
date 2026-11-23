@@ -1,6 +1,6 @@
 # 08: Avaliação completa, medição e acessibilidade
 
-**Status:** concluída
+**Status:** a fazer
 
 **O que construir:** a F11 fecha com a prova de qualidade: o evalset completo do resumo aprovando
 ≥ 98% dos casos, o p95 ≤ 5 s e o custo por Pedido medidos com o modelo padrão, e a nota 100 de
@@ -16,16 +16,16 @@ Acessibilidade do Lighthouse nos dois temas. Referências:
 **Bloqueada por:** 04 (Resumo com Recorte), 05 (O Agente aparece digitando), 06 (Falhas, limite de
 pedidos e teto de custo) e 07 (Escolher o Recorte por Resposta pronta ou responder sem Menção)
 
-- [x] **CA1** · O evalset chega a cerca de 24 casos, com as duas Conversas com instruções
+- [ ] **CA1** · O evalset chega a cerca de 24 casos, com as duas Conversas com instruções
   injetadas, a Pessoa citada pelo nome e por Menção, Mensagens de Agentes e apagadas no Recorte, e
   aprova ≥ 98% dos casos; o resultado e o `token_usage_v1` ficam nesta pasta.
-- [x] **CA2** · A medição do p95, da Mensagem enviada até a resposta aparecer, numa Conversa de 500
+- [ ] **CA2** · A medição do p95, da Mensagem enviada até a resposta aparecer, numa Conversa de 500
   Mensagens com o modelo padrão, e o custo por Pedido calculado dos tokens ficam nesta pasta.
 - [ ] **CA3** · O roteiro manual do Lighthouse, feito por uma pessoa com uma Conversa que tem um
   resumo e uma pergunta com Respostas prontas, registra 100 nos dois temas nesta pasta.
   **Dispensado pelo usuário em 2026-11-11:** o Lighthouse não foi medido na F11; o roteiro fica
   em `roteiro-manual.md` para quem quiser medir depois.
-- [x] **CA4** · O plano de testes da F11 fica junto dos testes do Playwright, e a suíte e2e inteira
+- [ ] **CA4** · O plano de testes da F11 fica junto dos testes do Playwright, e a suíte e2e inteira
   passa antes do PR.
   **Aceito com instabilidade conhecida:** a suíte inteira deu 275 de 278; os 3 que falharam
   (`atividade/abrir-na-mensagem` e `perfil/presenca`, de funcionalidades anteriores e sem relação
