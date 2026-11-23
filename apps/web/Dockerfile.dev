@@ -1,0 +1,15 @@
+FROM node:26-trixie-slim
+
+RUN npm install -g pnpm@11.28.9
+
+# Store do pnpm dentro do repositório montado (ignorado pelo git): sobrevive à recriação do
+# contêiner e é compartilhado entre os apps.
+ENV pnpm_config_store_dir=/home/node/app/.pnpm-store
+
+USER node
+
+WORKDIR /home/node/app/apps/web
+
+# As dependências são instaladas na subida, sobre o código montado do host. Se o install falhar,
+# o contêiner continua de pé para correção via `docker compose exec`.
+CMD ["sh", "-c", "pnpm install --config.confirm-modules-purge=false; tail -f /dev/null"]

@@ -1,0 +1,78 @@
+name: fullcycle-chat
+
+services:
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile.dev
+    # init como PID 1: o sh do CMD ignora SIGTERM, e sem isso todo stop termina em kill.
+    init: true
+    volumes:
+      - .:/home/node/app
+    environment:
+      CHAT_API_URL: http://chat-api:3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - chat-api
+
+  chat-api:
+    build:
+      context: ./apps/chat-api
+      dockerfile: Dockerfile.dev
+    init: true
+    volumes:
+      - .:/home/node/app
+    environment:
+      DATABASE_URL: postgres://chat:chat@postgres:5432/chat
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "3001:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      # Na primeira subida, cria os bancos chat, agents e business com seus usuários.
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+      - postgres-data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Eventos do tempo real e fila dos agentes.
+  redis:
+    image: redis:8
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+
+  # Substituto local do armazenamento S3 (relatórios em PDF, na F14).
+  s3:
+    image: chrislusf/seaweedfs:4.52
+    command: ["mini", "-dir=/data"]
+    environment:
+      AWS_ACCESS_KEY_ID: fullcycle
+      AWS_SECRET_ACCESS_KEY: fullcycle-secret
+      S3_BUCKET: reports
+    volumes:
+      - s3-data:/data
+    ports:
+      - "8333:8333"
+
+volumes:
+  postgres-data:
+  redis-data:
+  s3-data:
