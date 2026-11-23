@@ -45,6 +45,19 @@ describe('Erros da API', () => {
     });
   });
 
+  it('responde 400 com o code validation_failed quando o corpo é um JSON malformado', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/v1/rota-inexistente')
+      .set('Content-Type', 'application/json')
+      .send('{"malformado"');
+
+    expect(response.status).toBe(400);
+    expect(response.body).toMatchObject({
+      status: 400,
+      code: 'validation_failed',
+    });
+  });
+
   it('responde 500 sem a mensagem interna nem stack trace e registra o erro em log', async () => {
     const logError = jest
       .spyOn(Logger.prototype, 'error')

@@ -25,8 +25,23 @@ const DEFAULT_DETAIL: Record<ErrorCode, string> = {
 type Problem = { status: number; code: ErrorCode; detail: string };
 
 /**
+ * Os `type` dos erros de cliente do leitor do corpo do Express (body-parser e raw-body). Outra
+ * biblioteca pode ter erros com `status` e `type`, e eles continuam sendo inesperados.
+ */
+const BODY_PARSER_ERROR_TYPES = new Set([
+  'charset.unsupported',
+  'encoding.unsupported',
+  'entity.parse.failed',
+  'entity.too.large',
+  'entity.verify.failed',
+  'parameters.too.many',
+  'request.aborted',
+  'request.size.invalid',
+]);
+
+/**
  * Status aceito de um erro que não é de domínio: o da `HttpException` e o do erro do leitor do
- * corpo do Express (body-parser), que traz `status` e `type`. Qualquer outro é inesperado.
+ * corpo do Express. Qualquer outro é inesperado.
  */
 function statusOf(exception: unknown): number | undefined {
   if (exception instanceof HttpException) return exception.getStatus();
@@ -35,7 +50,9 @@ function statusOf(exception: unknown): number | undefined {
     status?: unknown;
     type?: unknown;
   };
-  return typeof status === 'number' && typeof type === 'string'
+  return typeof status === 'number' &&
+    typeof type === 'string' &&
+    BODY_PARSER_ERROR_TYPES.has(type)
     ? status
     : undefined;
 }
@@ -64,20 +81,21 @@ export class ProblemDetailsFilter implements ExceptionFilter {
   private readonly logger = new Logger(ProblemDetailsFilter.name);
 
   catch(exception: unknown, host: ArgumentsHost): void {
-    const problem = this.toProblem(exception);
+    const response = host.switchToHttp().getResponse<Response>();
+    if (response.headersSent) {
+      // A resposta já começou a sair: não há como trocá-la por um erro, só registrar.
+      this.logger.error('Erro depois do envio da resposta', exception);
+      return;
+    }
 
-    host
-      .switchToHttp()
-      .getResponse<Response>()
-      .status(problem.status)
-      .type(PROBLEM_CONTENT_TYPE)
-      .json({
-        type: 'about:blank',
-        title: STATUS_CODES[problem.status],
-        status: problem.status,
-        detail: problem.detail,
-        code: problem.code,
-      });
+    const problem = this.toProblem(exception);
+    response.status(problem.status).type(PROBLEM_CONTENT_TYPE).json({
+      type: 'about:blank',
+      title: STATUS_CODES[problem.status],
+      status: problem.status,
+      detail: problem.detail,
+      code: problem.code,
+    });
   }
 
   private toProblem(exception: unknown): Problem {
