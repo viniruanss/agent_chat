@@ -1,2 +1,6 @@
 allowBuilds:
   '@parcel/watcher': false
+peerDependencyRules:
+  allowedVersions:
+    # Testado com o TypeORM 1.x: a SnakeNamingStrategy só estende a DefaultNamingStrategy.
+    typeorm-naming-strategies>typeorm: '1'

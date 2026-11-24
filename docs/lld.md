@@ -1,6 +1,6 @@
 # LLD — Full Cycle Chat
 
-2026-11-12 · Luiz Carlos · Status: rascunho · HLD: [hld.md](hld.md)
+2026-11-23 · Luiz Carlos · Status: rascunho · HLD: [hld.md](hld.md)
 
 **Onde mora cada fato**
 
@@ -899,6 +899,8 @@ O que cada contêiner recebe está no HLD, seção 8, "Configuração e segredos
 | API do chat | `WEB_ORIGIN` | Origem aceita no handshake do WebSocket |
 | API do chat | `REDIS_URL` | Conexão com o Redis |
 | API do chat | `TEST_REDIS_URL` | Banco lógico do Redis dos testes |
+| API do chat | `TEST_DATABASE_URL` | Banco do chat dos testes e2e (`chat_test`) |
+| API do chat | `TEST_DATABASE_ADMIN_URL` | Superusuário local que o `globalSetup` usa para criar o `chat_test` |
 | API do chat | `SESSION_TTL_DAYS` | `Duração da Sessão` |
 | API do chat | `PRESENCE_GRACE_MS` | `Carência da presença`, reduzida nos testes e2e (`test/support/test-env.ts`) |
 | API do chat | `PORT` | Porta HTTP em que a API escuta |

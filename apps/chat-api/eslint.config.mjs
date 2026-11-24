@@ -32,4 +32,20 @@ export default tseslint.config(
       "prettier/prettier": ["error", { endOfLine: "auto" }],
     },
   },
+  {
+    // Só o módulo de configuração lê o ambiente (LLD, "Configuração").
+    files: ['src/**/*.ts'],
+    ignores: ['src/config/**'],
+    rules: {
+      'no-restricted-properties': [
+        'error',
+        {
+          object: 'process',
+          property: 'env',
+          message:
+            'Leia a configuração pelo ConfigService ou pelo loadEnv() de src/config/.',
+        },
+      ],
+    },
+  },
 );

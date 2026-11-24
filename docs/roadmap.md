@@ -17,7 +17,7 @@ O ID vira link para a pasta da funcionalidade, em `docs/funcionalidades/`, quand
 
 | ID | Funcionalidade | Ao final a pessoa consegue | Depende de | Status |
 | --- | --- | --- | --- | --- |
-| [F01](funcionalidades/01-login-e-sessao/) | Login e sessão | Entrar com e-mail e senha numa conta criada pela empresa, continuar logada em todas as abas do navegador e sair. | — | spec pronta |
+| [F01](funcionalidades/01-login-e-sessao/) | Login e sessão | Entrar com e-mail e senha numa conta criada pela empresa, continuar logada em todas as abas do navegador e sair. | — | em andamento |
 | [F02](funcionalidades/02-mensagens-em-canal-publico/) | Mensagens em canal público | Abrir um canal público, enviar mensagens e rolar o histórico até as mais antigas. | F01 | spec pronta |
 | [F03](funcionalidades/03-tempo-real/) | Tempo real | Ver as mensagens dos outros chegarem sem recarregar a página, ver quem está digitando e não perder nada depois de uma queda de conexão. | F02 | spec pronta |
 | [F04](funcionalidades/04-criacao-de-canais-e-convite-para-canal-privado/) | Criação de canais e convite para canal privado | Criar um canal público ou privado e convidar pessoas para o privado, que só os convidados veem. | F02 | spec pronta |
@@ -90,7 +90,8 @@ flowchart LR
   classDef emAndamento fill:#fef3c7,stroke:#d97706,color:#111827
   classDef concluida fill:#d1fae5,stroke:#059669,color:#111827
 
-  class F01,F02,F03,F04,F05,F06,F07,F08,F09,F10,F11,F12,F13,F14 specPronta
+  class F01 emAndamento
+  class F02,F03,F04,F05,F06,F07,F08,F09,F10,F11,F12,F13,F14 specPronta
 ```
 
 A seta vai da funcionalidade que precisa estar concluída para a que depende dela. A cor é o
